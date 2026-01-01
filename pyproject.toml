@@ -1,0 +1,12 @@
+[project]
+name = "vertex-search-mcp-tool"
+version = "0.1.0"
+description = "A Python-based MCP tool for Vertex AI Search."
+authors = []
+readme = "README.md"
+dependencies = [
+    "fastmcp",
+    "google-cloud-discoveryengine",
+    "python-dotenv",
+    "pydantic"
+]
