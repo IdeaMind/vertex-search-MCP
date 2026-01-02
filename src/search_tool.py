@@ -1,6 +1,8 @@
 import os
+import json
 from fastmcp import FastMCP
 from google.cloud import discoveryengine
+import google.auth
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -25,7 +27,19 @@ def initialize_client():
     if not all([project_id, location, data_store_id]):
         raise ValueError("Missing required environment variables: PROJECT_ID, LOCATION, DATA_STORE_ID")
 
-    client = discoveryengine.SearchServiceClient()
+    # Handle credentials
+    creds_env = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    creds = None
+    if creds_env:
+        if creds_env.strip().startswith('{'):
+            # Treat as JSON string
+            creds_dict = json.loads(creds_env)
+            creds, _ = google.auth.load_credentials_from_dict(creds_dict)
+        else:
+            # Treat as file path
+            creds, _ = google.auth.load_credentials_from_file(creds_env)
+
+    client = discoveryengine.SearchServiceClient(credentials=creds)
     return client
 
 @mcp.tool()
