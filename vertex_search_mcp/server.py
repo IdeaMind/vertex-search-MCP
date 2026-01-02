@@ -1,3 +1,4 @@
+#!usr/bin/env python3
 import os
 import json
 from fastmcp import FastMCP
@@ -96,5 +97,8 @@ def search(query: str, limit: int = 5) -> str:
     except Exception as e:
         return f"Error performing search: {str(e)}"
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == "__main__":
+    main()

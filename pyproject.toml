@@ -1,8 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
-name = "vertex-search-mcp-tool"
+name = "vertex-search-mcp"
 version = "0.1.0"
 description = "A Python-based MCP tool for Vertex AI Search."
-authors = []
+authors = [
+    {name = "Adam Renner, Idea Mind", email = "adam@email.com"}
+]
 readme = "README.md"
 dependencies = [
     "fastmcp",
@@ -10,3 +16,15 @@ dependencies = [
     "python-dotenv",
     "pydantic"
 ]
+
+[project.scripts]
+vertex-search-mcp = "vertex_search_mcp.server:main"
+
+
+[project.urls]
+Homepage = "https://github.com/IdeaMind/vertex-search-MCP"
+Repository = "https://github.com/IdeaMind/vertex-search-MCP"
+Issues = "https://github.com/IdeaMind/vertex-search-MCP/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["vertex_search_mcp"]
